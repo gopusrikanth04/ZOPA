@@ -17,12 +17,7 @@
     "@sap-ux/ui5-middleware-fe-mockserver": "2",
     "@sap/ux-ui5-tooling": "1",
     "@ui5/cli": "^4.0.33",
-    "eslint": "^9",
-    "karma": "^6.4.4",
-    "karma-chrome-launcher": "^3.2.0",
-    "karma-html-reporter": "^0.2.7",
-    "karma-qunit": "^4.2.1",
-    "karma-ui5": "^4.1.0"
+    "eslint": "^9"
   },
   "scripts": {
     "start": "fiori run --open \"test/flp.html#app-preview\"",
@@ -35,8 +30,7 @@
     "start-mock": "fiori run --config ./ui5-mock.yaml --open \"test/flp.html#app-preview\"",
     "int-test": "fiori run --config ./ui5-mock.yaml --open \"test/integration/opaTests.qunit.html\"",
     "start-variants-management": "fiori run --open \"/preview.html#app-preview\"",
-    "unit-test": "fiori run --config ./ui5-mock.yaml --open \"test/unit/unitTests.qunit.html\"",
-   "opa-ci": "karma start karma.conf.cjs"
+    "unit-test": "fiori run --config ./ui5-mock.yaml --open \"test/unit/unitTests.qunit.html\""
   },
   "sapuxLayer": "CUSTOMER_BASE"
 }
