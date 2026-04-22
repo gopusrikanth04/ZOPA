@@ -1,28 +1,124 @@
 module.exports = function (config) {
 
-  config.set({
+    config.set({
 
-    frameworks: ["ui5"],
+        frameworks: ["ui5"],
 
-    ui5: {
-      type: "application",
-      paths: {
-        webapp: "webapp"
-      }
-    },
+        ui5: {
+            configPath: "ui5.yaml"
+        },
 
-    browsers: ["ChromeHeadless"],
+        hostname: process.env.PIPER_SELENIUM_HOSTNAME || "karma",
+        listenAddress: "0.0.0.0",
+        port: 9876,
+        browsers: ["ChromeWebDriver"],
+        customLaunchers: {
+            ChromeWebDriver: {
+                base: "WebDriver",
+                config: {
 
-    reporters: ["progress", "html"],
+                    hostname: process.env.PIPER_SELENIUM_WEBDRIVER_HOSTNAME || "selenium",
 
-    htmlReporter: {
-      outputDir: "test-results/opa",
-      reportName: "OPA5-Test-Report"
-    },
+                    port: parseInt(process.env.PIPER_SELENIUM_WEBDRIVER_PORT) || 4444
 
-    singleRun: true,
-    autoWatch: false
+                },
 
-  });
+                browserName: "chrome",
+
+                name: "Karma",
+
+                flags: [
+
+                    "--no-sandbox",
+
+                    "--disable-dev-shm-usage",
+
+                    "--disable-gpu",
+
+                    "--disable-web-security",
+
+                    "--allow-running-insecure-content"
+
+                ],
+
+                pseudoActivityInterval: 30000
+
+            }
+
+        },
+
+
+
+        reporters: ["progress", "html", "junit"],
+
+
+
+        htmlReporter: {
+
+            outputDir: "test-results/opa",
+
+            reportName: "OPA5-Test-Report"
+
+        },
+
+
+
+        junitReporter: {
+
+            outputDir: "reports",
+
+            outputFile: "TESTS-karma.xml",
+
+            useBrowserName: false,
+
+            suite: "KarmaTests"
+
+        },
+
+
+
+        captureTimeout: 210000,
+
+        browserDisconnectTimeout: 210000,
+
+        browserDisconnectTolerance: 3,
+
+        browserNoActivityTimeout: 210000,
+
+
+
+        singleRun: true,
+
+        autoWatch: false,
+
+        colors: true,
+
+        logLevel: config.LOG_INFO,
+
+
+
+        forceJSONP: true,
+
+        concurrency: 1,
+
+
+
+        plugins: [
+
+            "karma-ui5",
+
+            "karma-qunit",
+
+            "karma-chrome-launcher",
+
+            "karma-html-reporter",
+
+            "karma-junit-reporter",
+
+            "karma-webdriver-launcher"
+
+        ]
+
+    });
 
 };
